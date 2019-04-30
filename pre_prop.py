@@ -1,0 +1,8 @@
+df = pd.read_json('transactions.txt', lines=True)
+df['transactionDateTime'] = pd.to_datetime(df['transactionDateTime'])
+df.sort_values(by=['accountNumber', 'transactionDateTime'])
+df.drop(['customerId', 'echoBuffer', 'merchantCity', 'merchantState', 'merchantZip', 'posOnPremises', 'recurringAuthInd'], axis=1, inplace=True)
+df['cardPresent'] = df['cardPresent'].astype(int)
+df['expirationDateKeyInMatch'] = df['expirationDateKeyInMatch'].astype(int)
+df['isFraud'] = df['isFraud'].astype(int)
+df.creditLimit = df.creditLimit.astype(float)
